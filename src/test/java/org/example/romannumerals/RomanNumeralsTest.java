@@ -42,7 +42,30 @@ public class RomanNumeralsTest {
             "-1, java.lang.IllegalArgumentException",
             "4000, java.lang.IllegalArgumentException"
     })
-    public void givenInvalidNumberValueThenThrowException(int number, Class<    Exception> exceptionClass) {
+    public void givenInvalidNumberValueThenThrowException(int number, Class<Exception> exceptionClass) {
         assertThrows(exceptionClass, () -> romanNumerals.convertToNumeral(number));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "I, 1",
+            "IV, 4",
+            "IX, 9",
+            "XXI, 21",
+            "C, 100",
+            "CDXLIV, 444",
+            "CMXCIX, 999",
+            "MCMXC, 1990",
+            "MMMCMXCIX, 3999"
+    })
+    public void givenAValidNumeralThenConvertToExpectedNumberValue(String romanNumeral, int expectedValue) {
+        assertEquals(expectedValue, romanNumerals.convertToNumber(romanNumeral));
+    }
+
+    @Test
+    public void givenInvalidNumberValueThenThrowException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            romanNumerals.convertToNumber("INVALID");
+        });
     }
 }
