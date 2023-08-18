@@ -39,10 +39,10 @@ public class RomanNumeralsTest {
 
     @ParameterizedTest
     @CsvSource({
-            "-1, IllegalArgumentException",
-            "4000, IllegalArgumentException"
+            "-1, java.lang.IllegalArgumentException",
+            "4000, java.lang.IllegalArgumentException"
     })
-    public void givenInvalidNumberValueThenThrowException(int number, Class<? extends Exception> exceptionClass) {
+    public void givenInvalidNumberValueThenThrowException(int number, Class<    Exception> exceptionClass) {
         assertThrows(exceptionClass, () -> romanNumerals.convertToNumeral(number));
     }
 }
